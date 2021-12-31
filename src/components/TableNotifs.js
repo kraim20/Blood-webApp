@@ -49,9 +49,9 @@ export default function TableNotifs() {
                                     class="
               w-1/3
               py-2
-              border-b-2 border-blue-600
+              border-b-2 border-pink-600
               outline-none
-              focus:border-yellow-400
+              focus:border-pink-400
             "
                                 />
                             </div>
@@ -59,8 +59,8 @@ export default function TableNotifs() {
                                 <Link to="/newnotif">
                                     <button
                                         class="
-                bg-blue-500
-                hover:bg-blue-700
+                bg-pink-500
+                hover:bg-pink-700
                 text-white
                 py-1
                 px-3
@@ -75,26 +75,26 @@ export default function TableNotifs() {
 
                         </div>
                         <table class="table text-gray-400 border-separate space-y-6 text-sm">
-                            <thead class="bg-blue-500 text-white">
+                            <thead class="bg-pink-500 text-white">
                                 <tr>
-                                    <th class="p-3">Title</th>
-                                    <th class="p-3 text-left">Date</th>
-                                    <th class="p-3 text-left">Blood Type</th>
-                                    <th class="p-3 text-left">Message</th>
+                                    <th class="px-12 py-3">Title</th>
+                                    <th class="px-12 text-left">Date</th>
+                                    <th class="px-12 text-left">Blood Type</th>
+                                    <th class="px-12 text-left">Message</th>
 
-                                    <th class="p-3 text-left">Action</th>
+                                    <th class="px-12 text-left">Action</th>
                                 </tr>
                             </thead>
                             {apiData.map((data) => {
                             <tbody>
 
-                                <tr class="bg-blue-200 lg:text-black">
-                                    <td class="p-3 font-medium capitalize">data.title</td>
-                                    <td class="p-3">data.date</td>
-                                    <td class="p-3">data.bloodType</td>
-                                    <td class="p-3 uppercase">data.message</td>
+                                <tr class="bg-pink-200 lg:text-white">
+                                    <td class="px-12 py-3  font-medium capitalize">data.title</td>
+                                    <td class="px-12">data.date</td>
+                                    <td class="px-12">data.bloodType</td>
+                                    <td class="px-12 uppercase">data.message</td>
 
-                                    <td class="p-3">
+                                    <td class="px-12">
                                         <Link to="/updatenotif"
                                             onClick={() => setData(data.id, data.title, data.bloodType, data.message)}
                                          class="text-yellow-400 hover:text-gray-100 mx-2">

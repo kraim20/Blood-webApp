@@ -16,6 +16,7 @@ import PersonnelInfoCenter from "./components/PersonnelInfoCenter";
 import { NewNotification } from "./components/NewNotification";
 import { UpdateNotification } from "./components/UpdateNotification";
 import  TableCenter from "./components/Tablecenter";
+import { NavbarAdmin } from "./components/NavbarAdmin";
 function App() {
   return (
           <BrowserRouter>
@@ -35,6 +36,7 @@ function App() {
                   <Route path="/personnelinfocenter" element={<PersonnelInfoCenter />} />
                   <Route path="/newnotif" element={<NewNotification/>}/>
                   <Route path="/updatenotif" element={<UpdateNotification/>}/>
+                  <Route path="/navbaradmin" element={<NavbarAdmin/>}/>
                 </Routes>
                 <Footer/>
           </BrowserRouter>

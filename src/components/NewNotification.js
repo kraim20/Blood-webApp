@@ -67,7 +67,7 @@ export const NewNotification = () => {
                     <div class="flex items-center w-full pt-4 mb-4">
                         <button 
                             onClick={sendDataToAPI}
-                            class="w-full py-3 text-base text-white transition duration-500 ease-in-out transform bg-blue-600 border-blue-600 rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:bg-blue-800 "> Save </button>
+                            class="w-full py-3 text-base text-white transition duration-500 ease-in-out transform bg-pink-600 border-blue-600 rounded-md focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:bg-pink-800 "> Save </button>
                     </div>
                 </form>
             </div>
