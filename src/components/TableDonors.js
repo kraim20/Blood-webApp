@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../App.css';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import FileDownload from './FileDownload';
 
 export default function TableDonors() {
 
@@ -30,7 +31,7 @@ export default function TableDonors() {
         console.log(id)
         axios.get("http://localhost:8080/user/delete/" + id);
         fecthUser();
-        navigate("/tablenotifs")
+        navigate("/tabledonors")
             
     }
 
@@ -46,20 +47,7 @@ export default function TableDonors() {
                     <div class="overflow-auto lg:overflow-visible">
                         <div class="flex lg:justify-between border-b-2 border-fuchsia-900 pb-1">
                             <h2 class="text-2xl text-gray-500 font-bold">Donors</h2>
-                            <div class="text-center flex-auto">
-                                <input
-                                    type="text"
-                                    name="name"
-                                    placeholder="Search..."
-                                    class="
-              w-1/3
-              py-2
-              border-b-2 border-pink-600
-              outline-none
-              focus:border-pink-400
-            "
-                                />
-                            </div>
+                            
 
                         </div>
                         <table  class="table text-gray-400 border-separate space-y-6 text-sm">
@@ -69,6 +57,7 @@ export default function TableDonors() {
                                     <th class="px-12 py-3 text-left">Last name</th>
                                     <th class="px-12 py-3 text-left">Age</th>
                                     <th class="px-12 py-3 text-left">CIN</th>
+                                    <th class="px-12 text-left">Analyze</th>
 
                                     <th class="px-12 py-3 text-left">Action</th>
                                 </tr>
@@ -77,11 +66,14 @@ export default function TableDonors() {
                              return(  
                             <tbody>
 
-                                <tr class="bg-pink-200 lg:text-white">
+                                    <tr class="bg-gray-200 lg:text-black">
                                     <td class="p-12 font-medium capitalize">{data.nom}</td>
                                     <td class="p-12">{data.prenom}</td>
                                     <td class="p-12">{data.age}</td>
                                     <td class="p-12 uppercase">{data.cin}</td>
+                                    <td class="px-12">
+                                             <FileDownload/>
+                                    </td>
 
                                     <td class="p-12">
                                              <button onClick={(event) => onDelete(data.cin)}  >delete</button>

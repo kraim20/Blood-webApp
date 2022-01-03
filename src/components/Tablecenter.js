@@ -30,7 +30,7 @@ export default function TableCenter() {
         console.log(id)
         axios.get("http://localhost:8080/user/delete/" + id);
         fecthUser();
-        navigate("/tablenotifs")
+        navigate("/tablecenter")
 
     }
 
@@ -46,29 +46,16 @@ export default function TableCenter() {
                     <div class="overflow-auto lg:overflow-visible">
                         <div class="flex lg:justify-between border-b-2 border-fuchsia-900 pb-1">
                             <h2 class="text-2xl text-gray-500 font-bold">Donors</h2>
-                            <div class="text-center flex-auto">
-                                <input
-                                    type="text"
-                                    name="name"
-                                    placeholder="Search..."
-                                    class="
-              w-1/3
-              py-2
-              border-b-2 border-pink-600
-              outline-none
-              focus:border-pink-400
-            "
-                                />
-                            </div>
+                        
 
                         </div>
                         <table class="table text-gray-400 border-separate space-y-6 text-sm">
                             <thead class="bg-pink-500 text-white">
                                 <tr>
-                                    <th class="px-12 py-3">First name</th>
-                                    <th class="px-12 py-3 text-left">Last name</th>
-                                    <th class="px-12 py-3 text-left">Age</th>
-                                    <th class="px-12 py-3 text-left">CIN</th>
+                                    <th class="px-12 py-3">Id center</th>
+                                    <th class="px-12 py-3 text-left">Name</th>
+                                    <th class="px-12 py-3 text-left">Adress</th>
+                                    <th class="px-12 py-3 text-left"></th>
 
                                     <th class="px-12 py-3 text-left">Action</th>
                                 </tr>
@@ -77,11 +64,11 @@ export default function TableCenter() {
                                 return (
                                     <tbody>
 
-                                        <tr class="bg-pink-200 lg:text-white">
-                                            <td class="p-12 font-medium capitalize">{data.nom}</td>
-                                            <td class="p-12">{data.prenom}</td>
-                                            <td class="p-12">{data.age}</td>
-                                            <td class="p-12 uppercase">{data.cin}</td>
+                                        <tr class="bg-gray-200 lg:text-black">
+                                            <td class="p-12 font-medium capitalize">{data.id}</td>
+                                            <td class="p-12">{data.nom}</td>
+                                            <td class="p-12">{data.adresse}</td>
+                                            <td class="p-12 uppercase"></td>
 
                                             <td class="p-12">
                                                 <button onClick={(event) => onDelete(data.cin)}  >delete</button>

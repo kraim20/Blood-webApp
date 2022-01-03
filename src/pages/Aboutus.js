@@ -35,9 +35,9 @@ export const Aboutus = () => {
                 height="24"
               />
             </svg>
-            <span className="relative">Who</span>
-          </span>{' '}
-          we are ?
+            <span className="relative">Who we are ?</span>
+          </span>
+            
         </h2>
         <p className="text-base text-gray-700 md:text-lg">
           A group of engineers and self taught developers who are trying to be the savior of many lives through their job.

@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function TableNotifs() {
 
+    const navigate = useNavigate();
     const [apiData, setApiData] = useState([]);
-    useEffect(() => {
-        axios.get(`API_link`)
+    const fecthannonce = () => {
+        axios.get("http://localhost:8080/annonce/all")
             .then((getData) => {
                 setApiData(getData.data);
+                console.log(apiData);
             })
-    }, [])
+    }
+
+    useEffect(() => {
+        fecthannonce();
+    }, []);
 
     const setData = (id, title, date, bloodType) => {
         localStorage.setItem('ID', id)
@@ -28,10 +34,11 @@ export default function TableNotifs() {
     }
 
     const onDelete = (id) => {
-        axios.delete(`API_link/${id}`)
-            .then(() => {
-                getData();
-            })
+        axios.get("http://localhost:8080/annonce/delete/" + id).then((res) => {
+            console.log(res.data);
+        })
+        fecthannonce();
+        navigate("/tablenotifs");
     }
 
     return (
@@ -77,38 +84,40 @@ export default function TableNotifs() {
                         <table class="table text-gray-400 border-separate space-y-6 text-sm">
                             <thead class="bg-pink-500 text-white">
                                 <tr>
-                                    <th class="px-12 py-3">Title</th>
-                                    <th class="px-12 text-left">Date</th>
-                                    <th class="px-12 text-left">Blood Type</th>
+                                    <th class="px-12 py-3">Id</th>
+                                    <th class="px-12 text-left">Date de creation</th>
+                                    <th class="px-12 text-left">Date limite</th>
+                                    <th class="px-12 text-left">blood types</th>
                                     <th class="px-12 text-left">Message</th>
 
                                     <th class="px-12 text-left">Action</th>
                                 </tr>
                             </thead>
-                            {apiData.map((data) => {
-                            <tbody>
+                            {apiData.map((data, index) => {
+                                return (
+                                    <tbody>
 
-                                <tr class="bg-pink-200 lg:text-white">
-                                    <td class="px-12 py-3  font-medium capitalize">data.title</td>
-                                    <td class="px-12">data.date</td>
-                                    <td class="px-12">data.bloodType</td>
-                                    <td class="px-12 uppercase">data.message</td>
+                                        <tr class="bg-pink-200 lg:text-white">
+                                            <td class="px-12 py-3  font-medium capitalize">{data.id}</td>
+                                            <td class="px-12">{data.datecreation}</td>
+                                            <td class="px-12">{data.datelimite}</td>
 
-                                    <td class="px-12">
-                                        <Link to="/updatenotif"
-                                            onClick={() => setData(data.id, data.title, data.bloodType, data.message)}
-                                         class="text-yellow-400 hover:text-gray-100 mx-2">
-                                            <i class="material-icons-outlined text-base">edit</i>
-                                        </Link>
-                                        <Link
-                                            onClick={() => onDelete(data.id)}
-                                            class="text-red-400 hover:text-gray-100 ml-2"
-                                        >
-                                            <i class="material-icons-round text-base">Delete</i>
-                                        </Link>
-                                    </td>
-                                </tr>
-                            </tbody>
+                                            <td class="px-12">{data.bloods.map((blood, index) => {
+                                                return (
+                                                    <td> {blood.blood_name} , </td>
+                                                )
+                                            })
+                                            }</td>
+
+                                            <td class="px-12 uppercase">{data.message}</td>
+
+                                            <td class="p-12">
+                                                <button onClick={(event) => onDelete(data.id)}  >delete</button>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                )
                             })}
                         </table>
                     </div>

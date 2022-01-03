@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useState} from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import { Home } from "./pages/Home";
@@ -17,7 +17,12 @@ import { NewNotification } from "./components/NewNotification";
 import { UpdateNotification } from "./components/UpdateNotification";
 import  TableCenter from "./components/Tablecenter";
 import { NavbarAdmin } from "./components/NavbarAdmin";
+import TableNotifUser from "./components/tableNotifUser";
+import TableDonorsCenter from "./components/TableDonorsCenter";
 function App() {
+
+  const [user, setLoginUser] = useState({})
+
   return (
           <BrowserRouter>
                 <Navbar/>
@@ -26,9 +31,9 @@ function App() {
                   <Route path="/aboutus" element={<Aboutus/>} />
                   <Route path="/contactus" element={<Contactus/>} />
                   <Route path="/faqs" element={<Faqs/>} />
-                  <Route path="/signin" element={<SignIn/>} />
+                  <Route path="/signin" element={<SignIn setLoginUser={setLoginUser}/>} />
                   <Route path="/signup" element={<SignUp/>} />
-                  <Route path="/admindashboard" element={<AdminDashboard/>} />
+                  <Route path="/admindashboard" element={<AdminDashboard />} />
                   <Route path="/tabledonors" element={<TableDonors/>}/>
                   <Route path="/tablecenter" element={<TableCenter />} />
                   <Route path="/tablenotifs" element={<TableNotifs/>}/>
@@ -37,7 +42,9 @@ function App() {
                   <Route path="/newnotif" element={<NewNotification/>}/>
                   <Route path="/updatenotif" element={<UpdateNotification/>}/>
                   <Route path="/navbaradmin" element={<NavbarAdmin/>}/>
-                </Routes>
+                  <Route path="/usernotifs" element={<TableNotifUser/>} />
+                  <Route path="/centerdonors" element={<TableDonorsCenter/>} />
+                </Routes> 
                 <Footer/>
           </BrowserRouter>
   );

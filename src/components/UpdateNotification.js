@@ -40,21 +40,21 @@ export const UpdateNotification = () => {
                         <input type="text" id="text" name="title" placeholder="title"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
-                         class="w-full px-4 py-2 mt-2 mr-4 text-base text-black transition duration-500 ease-in-out transform rounded-lg bg-gray-100 focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2" />
+                         class="w-full px-4 py-2 mt-2 mr-4 text-base text-black transition duration-500 ease-in-out transform rounded-lg bg-pink-100 focus:border-pink-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2" />
                     </div>
                     <div class="relative pt-4">
                         <label for="name" class="text-base leading-7 text-blueGray-500">Date</label>
                         <input type="date" id="date" name="date" placeholder="name"
                             value={date}
                             onChange={(e) => setDate(e.target.value)}
-                         class="w-full px-4 py-2 mt-2 mr-4 text-base text-black transition duration-500 ease-in-out transform rounded-lg bg-gray-100 focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2" />
+                         class="w-full px-4 py-2 mt-2 mr-4 text-base text-black transition duration-500 ease-in-out transform rounded-lg bg-pink-100 focus:border-pink-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2" />
                     </div>
                     <div class="relative mt-4">
                         <label for="bloodType" class="text-base leading-7 text-blueGray-500">Blood type</label>
                         <select
                             value={bloodType}
                             onChange={(e) => setBloodType(e.target.value)}
-                         class="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform rounded-lg bg-gray-100 focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2">
+                         class="w-full px-4 py-2 mt-2 text-base text-black transition duration-500 ease-in-out transform rounded-lg bg-pink-100 focus:border-pink-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2">
                             <option>A+</option>
                             <option>A-</option>
                             <option>B+</option>
@@ -71,7 +71,7 @@ export const UpdateNotification = () => {
                             <textarea
                              value={message}
                             onChange={(e) => setMessage(e.target.value)}
-                             class="w-full h-24 px-4 py-2 mt-2 text-base text-blueGray-500 transition duration-500 ease-in-out transform bg-white border rounded-lg focus:border-blue-500 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 apearance-none autoexpand" id="description" type="text" name="description" placeholder="Message..." required=""></textarea>
+                             class="w-full h-24 px-4 py-2 mt-2 text-base text-blueGray-500 transition duration-500 ease-in-out transform bg-pink-100 border rounded-lg focus:border-pink-500 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 apearance-none autoexpand" id="description" type="text" name="description" placeholder="Message..." required=""></textarea>
                         </div>
                     </div>
                     <div class="flex items-center w-full pt-4 mb-4">

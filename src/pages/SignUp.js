@@ -1,17 +1,85 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 export const SignUp = () => {
 
-    const navigate = useNavigate();
-    const HandleRegister = () =>{ 
-    navigate('/signin');
+  const navigate = useNavigate();
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    role: ""
+  })
+  const handleChange = e => {
+    const { name, value } = e.target
+    setUser({
+      ...user,
+      [name]: value
+    })
+  }
+  let verify = Boolean;
+  verify = false;
+  const checkpass = e => {
+    const { name, value } = e.target
+    if (value == user.password) {
+      console.log("ok")
+      verify = true;
+    } else {
+      console.log("!!")
+    }
+  }
+
+  let roleId = '';
+  if (user.role == "Center") {
+    roleId = 1;
+  } else if (user.role == "Donor") {
+    roleId = 2;
+  }
+  const register = () => {
+    if (verify) {
+      const { name, email, password, role } = user
+      let dbcompte = {
+        "email": user.email,
+        "password": user.password,
+        "validate": 1,
+        "id": 22
+      }
+      let dbuser = {
+        "cin": 22,
+        "nom": user.name,
+        "adresse": "",
+        "prenom": "",
+        "age": "55"
+      }
+      let user_compte = {
+        "user": dbuser,
+        "compte": dbcompte
+      };
+
+
+
+      axios.post("http://localhost:8080/signup/" + roleId, user_compte).then((res) => {
+        console.log("saved!!")
+      })
+
+
+      /*if (name && email && password && (password === reEnterPassword)) {
+        axios.post("http://localhost:8080/register", user)
+          .then(res => {
+            console.log(user)
+            localStorage.setItem("user", user)
+            navigate("/signin")
+          })
+      } else {
+        
+      }*/
+    }
   }
     return (
         <>
 			<div
-      class="min-h-screen flex flex-col items-center justify-center bg-gray-100"
-    >
+      class="min-h-screen flex flex-col items-center justify-center bg-gray-100">
       <div
         class="
           flex flex-col
@@ -38,7 +106,7 @@ export const SignUp = () => {
           <form action="#">
             <div class="flex flex-col mb-5">
               <label
-                for="email"
+                for="name"
                 class="mb-1 text-xs tracking-wide text-gray-600"
                 >Name:</label
               >
@@ -60,9 +128,9 @@ export const SignUp = () => {
                 </div>
 
                 <input
-                  id="email"
-                  type="email"
-                  name="email"
+                  id="name"
+                  type="text"
+                  name="name"
                   class="
                     text-sm
                     placeholder-gray-500
@@ -72,9 +140,10 @@ export const SignUp = () => {
                     border border-gray-400
                     w-full
                     py-2
-                    focus:outline-none focus:border-blue-400
+                    focus:outline-none focus:border-pink-400
                   "
                   placeholder="Enter your name"
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -82,7 +151,7 @@ export const SignUp = () => {
               <label
                 for="email"
                 class="mb-1 text-xs tracking-wide text-gray-600"
-                >E-Mail Address:</label
+                >E-mail Address:</label
               >
               <div class="relative">
                 <div
@@ -114,9 +183,10 @@ export const SignUp = () => {
                     border border-gray-400
                     w-full
                     py-2
-                    focus:outline-none focus:border-blue-400
+                    focus:outline-none focus:border-pink-400
                   "
                   placeholder="Enter your email"
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -158,17 +228,78 @@ export const SignUp = () => {
                     border border-gray-400
                     w-full
                     py-2
-                    focus:outline-none focus:border-blue-400
+                    focus:outline-none focus:border-pink-400
                   "
                   placeholder="Enter your password"
+                  onChange={handleChange}
                 />
               </div>
             </div>
+                <div class="flex flex-col mb-6">
+                  <label
+                    for="reEnterpassword"
+                    class="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
+                  >Re-enter your password:</label
+                  >
+                  <div class="relative">
+                    <div
+                      class="
+                    inline-flex
+                    items-center
+                    justify-center
+                    absolute
+                    left-0
+                    top-0
+                    h-full
+                    w-10
+                    text-gray-400
+                  "
+                    >
+                      <span>
+                        <i class="fas fa-lock text-blue-500"></i>
+                      </span>
+                    </div>
 
-            <div class="flex w-full">
-              <button
-                type="submit"
-                class="
+                    <input
+                      id="password"
+                      type="password"
+                      name="reEnterpassword"
+                      class="
+                    text-sm
+                    placeholder-gray-500
+                    pl-10
+                    pr-4
+                    rounded-2xl
+                    border border-gray-400
+                    w-full
+                    py-2
+                    focus:outline-none focus:border-pink-400
+                  "
+                      placeholder="Re-enter your password"
+                      onChange={handleChange}  
+                    />
+                  </div>
+                </div>
+                <div className="col-span-6 sm:col-span-3">
+                  <label htmlFor="country" className="block text-sm font-small text-gray-600">
+                    Who you are ?
+                  </label>
+                  <select
+                    id="role"
+                    name="role"
+                    className="py-2 mt-1 block w-full py-2 px-8 text-gray-500 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-pink-500 focus:border-pink-500 sm:text-sm rounded-2xl"
+                    onChange={handleChange}
+                  >
+                    <option>Donor</option>
+                    <option>Center</option>
+                  </select>
+                </div>
+          </form>
+              <div class="flex w-full">
+                <button
+                  type="submit"
+                  onClick={register}
+                  class="
                   flex
                   mt-2
                   items-center
@@ -185,32 +316,30 @@ export const SignUp = () => {
                   duration-150
                   ease-in
                 "
-              >
-                <span class="mr-2 uppercase">Sign Up</span>
-                <span>
-                  <svg
-                    class="h-6 w-6"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </span>
-              </button>
-            </div>
-          </form>
+                >
+                  <span class="mr-2 uppercase">Sign Up</span>
+                  <span>
+                    <svg
+                      class="h-6 w-6"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </span>
+                </button>
+              </div>
         </div>
       </div>
       <div class="flex justify-center items-center mt-6">
-        <a
-          href="#"
-          target="_blank"
+        <p
+          
           class="
             inline-flex
             items-center
@@ -227,7 +356,7 @@ export const SignUp = () => {
               >Login here</Link
             ></span
           >
-        </a>
+        </p>
       </div>
     </div>
         </>

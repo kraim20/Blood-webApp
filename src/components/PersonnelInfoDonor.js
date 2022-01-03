@@ -1,6 +1,9 @@
 import React from 'react'
 
 export default function PersonnelInfoDonor() {
+
+  const user = JSON.parse(localStorage.getItem("userT"));
+  const compte = JSON.parse(localStorage.getItem("compte"))
     return (
         <>
                   <div className="mt-10 sm:mt-0 py-5">
@@ -23,6 +26,7 @@ export default function PersonnelInfoDonor() {
                       <input
                         type="text"
                         name="first-name"
+                        value={user.name}
                         id="first-name"
                         autoComplete="given-name"
                           className="py-2 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -36,6 +40,7 @@ export default function PersonnelInfoDonor() {
                       <input
                         type="text"
                         name="last-name"
+                        value={user.prenome}
                         id="last-name"
                         autoComplete="family-name"
                           className="py-2 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -49,6 +54,7 @@ export default function PersonnelInfoDonor() {
                       <input
                         type="text"
                         name="email-address"
+                        value={user.email}
                         id="email-address"
                         autoComplete="email"
                           className="py-2 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -62,6 +68,7 @@ export default function PersonnelInfoDonor() {
                       <select
                         id="country"
                         name="country"
+                        value={user.centre.name}
                         autoComplete="country-name"
                           className="py-2 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       >
@@ -78,6 +85,7 @@ export default function PersonnelInfoDonor() {
                         <select
                           id="country"
                           name="country"
+                          value={user.blood_name.blood_name}
                           autoComplete="country-name"
                           className="py-2 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         >
@@ -99,37 +107,15 @@ export default function PersonnelInfoDonor() {
                       <input
                         type="text"
                         name="street-address"
+                        value={user.adresse}
                         id="street-address"
                         autoComplete="street-address"
                           className="py-2 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
 
-                    <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-                      <label htmlFor="city" className="block text-sm font-medium text-gray-700">
-                        City
-                      </label>
-                      <input
-                        type="text"
-                        name="city"
-                        id="city"
-                        autoComplete="address-level2"
-                          className="py-2 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                      />
-                    </div>
+                
 
-                    <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                      <label htmlFor="region" className="block text-sm font-medium text-gray-700">
-                        State / Province
-                      </label>
-                      <input
-                        type="text"
-                        name="region"
-                        id="region"
-                        autoComplete="address-level1"
-                        className="py-2 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                      />
-                    </div>
                   </div>
                 </div>
                 <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">

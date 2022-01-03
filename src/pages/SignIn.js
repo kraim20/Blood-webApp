@@ -1,13 +1,69 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 
-export const SignIn = () => {
+export const SignIn = ({ setLoginUser }) => {
 
-      const navigate = useNavigate();
-    const HandleRegister = () =>{ 
-    navigate('/signup');
+  const navigate = useNavigate();
+
+  const [comptedb, setComptedb] = useState([]);
+  const [user, setUser] = useState({
+    email: "",
+    password: ""
+  })
+
+  const handleChange = e => {
+    const { name, value } = e.target
+    setUser({
+      ...user,
+      [name]: value
+    })
+  }
+  let compte = [
+    "email", user.email
+
+  ]
+
+  const getUser = (id) => {
+    axios.post("http://localhost:8080/compte/userofcompte/" + id).then((res) => {
+      console.log("res =>")
+      console.log(res.data)
+
+      //setComptedb(res.data);
+      localStorage.setItem('User', JSON.stringify(res.data))
+      //console.log( "user => ");
+      //console.log(comptedb)
+
+
+
+    })
   }
 
+  const getCentre = (id) => {
+    axios.post("http://localhost:8080/compte/centerofcompte/" + id).then((res) => {
+      console.log("res =>")
+      console.log(res.data)
+
+
+      localStorage.setItem('Centre', JSON.stringify(res.data))
+    })
+  }
+  let test = true;
+  function login(event) {
+    event.preventDefault();
+    axios.post("http://localhost:8080/object/Compte", compte).then(res => {
+      console.log("compte ")
+      console.log(res.data[0].role.role_name)
+      localStorage.setItem('compte', JSON.stringify(res.data[0]));
+      if (res.data[0].role.role_name == 'centre') {
+        getCentre(res.data[0].id)
+      } else if (res.data[0].role.role_name == 'donor') {
+        getUser(res.data[0].id)
+      }
+
+    });
+
+}
     return (
         <>
                 <div
@@ -41,7 +97,7 @@ export const SignIn = () => {
               <label
                 for="email"
                 class="mb-1 text-xs tracking-wide text-gray-600"
-                >E-Mail Address:</label
+                >E-mail Address:</label
               >
               <div class="relative">
                 <div
@@ -64,6 +120,7 @@ export const SignIn = () => {
                   id="email"
                   type="email"
                   name="email"
+                  onChange={handleChange} 
                   class="
                     text-sm
                     placeholder-gray-500
@@ -73,7 +130,7 @@ export const SignIn = () => {
                     border border-gray-400
                     w-full
                     py-2
-                    focus:outline-none focus:border-blue-400
+                    focus:outline-none focus:border-pink-400
                   "
                   placeholder="Enter your email"
                 />
@@ -100,7 +157,7 @@ export const SignIn = () => {
                   "
                 >
                   <span>
-                    <i class="fas fa-lock text-blue-500"></i>
+                    <i class="fas fa-lock text-pink-500"></i>
                   </span>
                 </div>
 
@@ -108,6 +165,7 @@ export const SignIn = () => {
                   id="password"
                   type="password"
                   name="password"
+                  onChange={handleChange}  
                   class="
                     text-sm
                     placeholder-gray-500
@@ -117,7 +175,7 @@ export const SignIn = () => {
                     border border-gray-400
                     w-full
                     py-2
-                    focus:outline-none focus:border-blue-400
+                    focus:outline-none focus:border-pink-400
                   "
                   placeholder="Enter your password"
                 />
@@ -127,6 +185,7 @@ export const SignIn = () => {
             <div class="flex w-full">
               <button
                 type="submit"
+                onClick={login}
                 class="
                   flex
                   mt-2

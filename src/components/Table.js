@@ -114,7 +114,7 @@ export default function Table() {
                       return(
             <tbody>
           
-              <tr class="bg-blue-200 lg:text-black">
+                <tr class="bg-gray-200 lg:text-black">
                 <td class="p-12 font-medium capitalize">{data.name}</td>
                 <td class="p-12">{data.mail}</td>
                 <td class="p-12">{data.phone}</td>
@@ -126,9 +126,6 @@ export default function Table() {
                   >
                 </td>
                 <td class="p-12">
-                  <Link href="#" class="text-gray-500 hover:text-gray-100 mr-2">
-                    <i class="material-icons-outlined text-base">visibility</i>
-                  </Link>
                   <Link href="#" class="text-yellow-400 hover:text-gray-100 mx-2">
                     <i class="material-icons-outlined text-base">edit</i>
                   </Link>
